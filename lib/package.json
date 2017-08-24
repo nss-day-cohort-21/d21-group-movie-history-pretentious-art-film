@@ -1,0 +1,35 @@
+{
+  "name": "lib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/firebase": "^2.4.32",
+    "@types/fuse": "^2.5.2",
+    "@types/grunt": "^0.4.21",
+    "@types/jquery": "^3.2.11",
+    "@types/lodash": "^4.14.72",
+    "@types/moment": "^2.13.0",
+    "browserify": "^14.0.0",
+    "firebase": "^4.3.0",
+    "fuse": "^0.4.0",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "jquery": "^3.1.1",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "lodash": "^4.17.4",
+    "matchdep": "^1.0.1",
+    "moment": "^2.18.1"
+  }
+}

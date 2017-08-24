@@ -1,0 +1,8 @@
+lib/node_modules/*
+css/*
+.vscode/*
+dist/*
+.editorconfig
+.DS_Store
+lib/.sass-cache/*
+.idea/*
