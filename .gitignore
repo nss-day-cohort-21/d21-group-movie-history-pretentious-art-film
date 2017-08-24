@@ -6,3 +6,4 @@ dist/*
 .DS_Store
 lib/.sass-cache/*
 .idea/*
+js/api.js
