@@ -41,6 +41,9 @@ let User = {
       .catch(error => {
         console.warn('ERROR: ', error.code, '--', error.message);
       });
+  },
+  getCurrentUser: function() {
+    return currentUser;
   }
 };
 
