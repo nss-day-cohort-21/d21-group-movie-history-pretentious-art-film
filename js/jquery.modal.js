@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const jQuery = require('jquery');
+// const jQuery = require('jquery');
 
 (function (factory) {
   // Making your jQuery plugin work better with npm tools
