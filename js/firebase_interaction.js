@@ -18,8 +18,6 @@ let FBInteraction = {
 	}
 };
 
-console.log('config', config.databaseURL);
-
 module.exports = FBInteraction;
 
 

@@ -13,13 +13,15 @@ function loadUserMovies() {
 	});
 }
 
-loadUserMovies();
+loadUserMovies();  //loading movies at page load for now
+
+
 //*************************
 //		Star Rating
 //*************************
 
 // $(function () {
- 
+
 //   $("#rateYo").rateYo({
 //     rating: 0,
 //     fullStar: true
