@@ -7,3 +7,4 @@ dist/*
 lib/.sass-cache/*
 .idea/*
 js/api.js
+js/get_keys.js
