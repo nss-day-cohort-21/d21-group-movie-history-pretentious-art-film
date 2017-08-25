@@ -1,6 +1,7 @@
 'use strict';
 
 const $ = require('jquery');
+
 const FBInteraction = require('./firebase_interaction');
 const User = require('./user');
 
@@ -15,16 +16,4 @@ function loadUserMovies() {
 
 loadUserMovies();  //loading movies at page load for now
 
-
-//*************************
-//		Star Rating
-//*************************
-
-// $(function () {
-
-//   $("#rateYo").rateYo({
-//     rating: 0,
-//     fullStar: true
-//   });
-// });
 
