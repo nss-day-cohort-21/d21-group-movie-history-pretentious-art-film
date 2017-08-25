@@ -1,7 +1,7 @@
 'use strict';
 let $ = require('jquery');
 let Api = require('./api.js');
-
+let User = require('./user');
 
 let dbInteraction = {
   //listens for keyup in search bar and searches TMDB
@@ -14,14 +14,38 @@ let dbInteraction = {
     });
   },
   getSingleMovieFromTMD: function(movieId) {
-    let api = Api.getTMDBkey();
-    $.ajax({
-      url: `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api}`
-    }).done(movieData => {
-      return movieData;
+    return new Promise(function(resolve, reject) {
+      let api = Api.getTMDBkey();
+      $.ajax({
+        url: `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api}`
+      }).done(movieData => {
+        resolve(movieData);
+      });
+    });
+  },
+  getMovieActors: function(movieId) {
+    return new Promise(function(resolve, reject) {
+      let api = Api.getTMDBkey();
+      $.ajax({
+        url: `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${api}`
+      }).done(actorsData => {
+        resolve(actorsData);
+      });
+    });
+  },
+  addMovieToFirebase: function(movieObj) {
+    return new Promise(function(resolve, reject) {
+      $.ajax({
+        url: `${User.getFirebaseConfi().databaseURL}/movies.json`,
+        type: 'POST',
+        data: JSON.stringify(movieObj),
+        dataType: 'json'
+      }).done(function(movie) {
+        console.log('Post Movie: ', movie);
+        resolve(movie);
+      });
     });
   }
 };
 
-dbInteraction.getSingleMovieFromTMD('1891');
 module.exports = dbInteraction;

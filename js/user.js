@@ -21,29 +21,25 @@ let currentUser;
 let User = {
   logInLogOut: function() {
     if (currentUser) {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
+      firebase.auth().signOut().then(() => {
           currentUser = null;
         })
         .catch(error => {
-          console.warn('ERROR: ', error.code, '--', error.message);
+        });
+    } else {
+      firebase.auth().signInWithPopup(provider)
+        .then(userObj => {
+          currentUser = userObj.user;
+        })
+        .catch(error => {
         });
     }
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(userObj => {
-        console.log('User Obj', JSON.stringify(userObj));
-        currentUser = userObj.user;
-      })
-      .catch(error => {
-        console.warn('ERROR: ', error.code, '--', error.message);
-      });
   },
   getCurrentUser: function() {
     return currentUser;
+  },
+  getFirebaseConfi: function(){
+    return config;
   }
 };
 
