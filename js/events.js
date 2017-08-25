@@ -26,9 +26,10 @@ let Handlers = {
         let actors = data[1].cast;
 
         let movieObj = Handlers.buildMovieObj(movie, actors);
+        console.log('Movie Obj: ', movieObj);
+
         dbInteraction.addMovieToFirebase(movieObj).then(function(movie) {
           console.log('Added Movie: ', movie);
-
         });
         // console.log('Build MovieObj: ', movieObj);
 
@@ -49,8 +50,8 @@ let Handlers = {
     let movieObj = {
       actors: actorsArray,
       genre: genresArray,
-      poster_thumbnail: `http://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-      poster_large: `http://image.tmdb.org/t/p/w780/${movie.poster_path}`,
+      poster_thumbnail: `http://image.tmdb.org/t/p/w185${movie.poster_path}`,
+      poster_large: `http://image.tmdb.org/t/p/w780${movie.poster_path}`,
       rating: 0,
       title: movie.original_title,
       year: movie.release_date,
