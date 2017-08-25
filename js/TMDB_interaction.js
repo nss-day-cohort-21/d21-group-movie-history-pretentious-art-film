@@ -41,7 +41,6 @@ let dbInteraction = {
         data: JSON.stringify(movieObj),
         dataType: 'json'
       }).done(function(movie) {
-        console.log('Post Movie: ', movie);
         resolve(movie);
       });
     });

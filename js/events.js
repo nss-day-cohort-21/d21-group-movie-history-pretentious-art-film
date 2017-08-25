@@ -28,12 +28,15 @@ let Handlers = {
         let movieObj = Handlers.buildMovieObj(movie, actors);
         console.log('Movie Obj: ', movieObj);
 
-        dbInteraction.addMovieToFirebase(movieObj).then(function(movie) {
-          console.log('Added Movie: ', movie);
-        });
-        // console.log('Build MovieObj: ', movieObj);
-
-        // console.log(actorsArray, '-', movie.genres, '-', [ `http://image.tmdb.org/t/p/w185/${movie.poster_path}`, `http://image.tmdb.org/t/p/w780/${movie.poster_path}`], movie.original_title, movie.release_date);
+        dbInteraction
+          .addMovieToFirebase(movieObj)
+          .then(function(movie) {
+            // Populate the DOM
+            console.log('Added Movie: ', movie);
+          })
+          .catch(error => {
+            console.warn('ERROR: ', error.code, error.message);
+          });
       });
     });
   },
