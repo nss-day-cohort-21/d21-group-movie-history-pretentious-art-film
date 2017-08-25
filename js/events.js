@@ -26,7 +26,6 @@ let Handlers = {
         let actors = data[1].cast;
 
         let movieObj = Handlers.buildMovieObj(movie, actors);
-        console.log('Movie Obj: ', movieObj);
 
         dbInteraction
           .addMovieToFirebase(movieObj)

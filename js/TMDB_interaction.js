@@ -6,7 +6,7 @@ let User = require('./user');
 let dbInteraction = {
   //listens for keyup in search bar and searches TMDB
   getMoviesFromDB: userInput => {
-    let api = Api.getTMDBkey();
+    let api = Api.getAPI().api;
     $.ajax({
       url: `https://api.themoviedb.org/3/search/movie?api_key=${api}&query=${userInput}&include_adult=false&page=1`
     }).done(movieData => {
@@ -15,7 +15,9 @@ let dbInteraction = {
   },
   getSingleMovieFromTMD: function(movieId) {
     return new Promise(function(resolve, reject) {
-      let api = Api.getTMDBkey();
+      let api = Api.getAPI().api;
+      console.log('TMB key: ', api);
+
       $.ajax({
         url: `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api}`
       }).done(movieData => {
@@ -25,7 +27,7 @@ let dbInteraction = {
   },
   getMovieActors: function(movieId) {
     return new Promise(function(resolve, reject) {
-      let api = Api.getTMDBkey();
+      let api = Api.getAPI().api;
       $.ajax({
         url: `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${api}`
       }).done(actorsData => {
