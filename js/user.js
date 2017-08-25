@@ -2,16 +2,10 @@
 // Dependencies
 const firebase = require('firebase');
 const $ = require('jquery');
+const fbConfig = require('./get_keys');
 
 // Firebase initialization
-const config = {
-  apiKey: 'AIzaSyCDbuxg0OfEiqFLQJv9Lw4Pd6LvEAFST8E',
-  authDomain: 'second-tester.firebaseapp.com',
-  databaseURL: 'https://second-tester.firebaseio.com',
-  projectId: 'second-tester',
-  storageBucket: 'second-tester.appspot.com',
-  messagingSenderId: '527615551007'
-};
+let config = fbConfig.getKey();
 firebase.initializeApp(config);
 
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -21,26 +15,25 @@ let currentUser;
 let User = {
   logInLogOut: function() {
     if (currentUser) {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
+      firebase.auth().signOut().then(() => {
           currentUser = null;
         })
         .catch(error => {
-          console.warn('ERROR: ', error.code, '--', error.message);
+        });
+    } else {
+      firebase.auth().signInWithPopup(provider)
+        .then(userObj => {
+          currentUser = userObj.user;
+        })
+        .catch(error => {
         });
     }
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(userObj => {
-        console.log('User Obj', JSON.stringify(userObj));
-        currentUser = userObj.user;
-      })
-      .catch(error => {
-        console.warn('ERROR: ', error.code, '--', error.message);
-      });
+  },
+  getCurrentUser: function() {
+    return currentUser;
+  },
+  getFirebaseConfi: function(){
+    return config;
   }
 };
 
