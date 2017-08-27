@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const jQuery = require('jquery');
+// const jQuery = require('jquery');
 
 (function (factory) {
   // Making your jQuery plugin work better with npm tools
@@ -13,7 +13,7 @@ const jQuery = require('jquery');
     factory(require("jquery"), window, document);
   }
   else {
-    factory(jQuery, window, document);
+    // factory(jQuery, window, document);
   }
 }(function($, window, document, undefined) {
 

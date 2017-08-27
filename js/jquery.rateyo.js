@@ -8,8 +8,6 @@
 //*************************
 //    Star Rating
 //*************************
-// Getter
-// var maxValue = $("#rateYo").rateYo("option", "maxValue");
 
 $(function () {
   $(".rateYo").rateYo({
@@ -19,14 +17,16 @@ $(function () {
     starWidth: "25px",
     fullStar: true
   });
-  // $(".rateYo").click(function (){
-  // var rating = $rateYo.rateYo("rating");
-  // return rating;
-  // });
-  // console.log("rating", rating);
 });
-
-
+// This returns the Rating number
+$(function () {
+ 
+  $("#rateYo").rateYo()
+              .on("rateyo.set", function (e, data) {
+              console.log("data.rating", data.rating);
+              return data.rating;
+              });
+});
 
 
 ;(function ($) {
@@ -1159,3 +1159,5 @@ $(function () {
   $.fn.rateYo = rateYo;
 
 }(window.jQuery));
+
+
