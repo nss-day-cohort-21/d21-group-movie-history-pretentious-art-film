@@ -1,19 +1,20 @@
-'use strict';
+// 'use strict';
 
-const $ = require('jquery');
+// const $ = require('jquery');
+// const rateYo = require('./jquery.rateyo');
 
-console.log('From Main');
+// console.log('From Main');
 
 
-//*************************
-//		Star Rating
-//*************************
+// //*************************
+// //		Star Rating
+// //*************************
 
-$(function () {
- 
-  $("#rateYo").rateYo({
-    rating: 0,
-    fullStar: true
-  });
-});
+// $(function () {
+
+//   $("#rateYo").rateYo({
+//     rating: 0,
+//     fullStar: true
+//   });
+// });
 

@@ -3,6 +3,8 @@
     Version 0.8.2
 */
 "use strict";
+// let jQuery = require('jquery');
+
 (function (factory) {
   // Making your jQuery plugin work better with npm tools
   // http://blog.npmjs.org/post/112712169830/making-your-jquery-plugin-work-better-with-npm

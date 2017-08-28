@@ -1,8 +1,29 @@
-li{
-	list-style: none;
+.each-card {
+  margin-top: 1em;
 }
 
-.movieCard{
-	display: inline-block;
-	margin-right: 20px;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row > div[class*='col-'] {
+ display: flex;
+}
+
+.list-group-item {
+  padding: 0;
+  border: none;
+}
+
+/* Keep image card same size
+============================*/
+.img-wrapper {
+  display: flex;
+  width: 254px;
+  height: 254px;
+}
+
+.car-img-top {
+  object-fit: cover;
 }
