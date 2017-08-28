@@ -3,7 +3,6 @@ let _ = require('lodash');
 let moment = require('moment');
 let dbInteraction = require('./TMDB_interaction.js');
 let User = require('./user');
-let template = require('./DOM_builder');
 
 let Handlers = {
   loginClickEvent: function() {
@@ -11,28 +10,16 @@ let Handlers = {
       User.logInLogOut();
     });
   },
-
-  /**
-   * Returns search input on keyup.
-   *
-   */
-  searchTmdbOnKeyUp: function(movieCall, actorsCall, domBuilder) {
-    $('#user-input').on('keypress', event => {
-      let userInput = $('#user-input');
-      if (event.keyCode === 13 && document.activeElement.id === 'user-input') {
-        movieCall(userInput.val()).then(movieData => {
-          let moviesId = _.map(movieData, function(movie) {
-            return movie.id;
-          });
-          domBuilder(moviesId);
-        });
-      }
+  getUserInput: function(movieAjaxCall) {
+    $('#user-input').on('keyup', () => {
+      let userInput = $('#user-input').val();
+      return movieAjaxCall(userInput);
     });
   },
   addMovieToWatchList: function(movieAjaxCall) {
     $(document).on('click', '#add-to-watchlist', function(event) {
       let movieId = $(this).data('movie-id');
-      let moviesPromise = dbInteraction.getSingleMovieFromTMDB(movieId);
+      let moviesPromise = dbInteraction.getSingleMovieFromTMD(movieId);
       let actorsPromise = dbInteraction.getMovieActors(movieId);
       return Promise.all([moviesPromise, actorsPromise]).then(data => {
         let movie = data[0];
@@ -44,7 +31,7 @@ let Handlers = {
           .addMovieToFirebase(movieObj)
           .then(function(movie) {
             // Populate the DOM
-            // console.log('Added Movie: ', movie);
+            console.log('Added Movie: ', movie);
           })
           .catch(error => {
             console.warn('ERROR: ', error.code, error.message);
@@ -79,11 +66,7 @@ let Handlers = {
 };
 
 Handlers.loginClickEvent();
-Handlers.addMovieToWatchList(dbInteraction.getSingleMovieFromTMDB);
-Handlers.searchTmdbOnKeyUp(
-  dbInteraction.getMoviesFromTmdbOnSearch,
-  dbInteraction.getMovieActors,
-  template.buildMovieCard
-);
+Handlers.addMovieToWatchList(dbInteraction.getSingleMovieFromTMD);
+Handlers.getUserInput(dbInteraction.getMoviesFromDB);
 
 module.exports = Handlers;
