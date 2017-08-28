@@ -11,7 +11,7 @@ function loadUserMovies() {
 	let currentUser = 'u90B7wHi2JUGpLB410jfTlsecoZ2'; //hard coding current user to test, delete line 9 later
 	FBInteraction.getMovies(currentUser)
 	.then((movieData)=>{
-		console.log("movie data", movieData);
+		// console.log("movie data", movieData);
 	});
 }
 
