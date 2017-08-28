@@ -10,8 +10,10 @@ let domBuilder = {
 
     _.forEach(movieData, function(movie) {
       let currentMovie = {
-        poster: movie.poster_path ? `http://image.tmdb.org/t/p/w185${movie.poster_path}` : `http://placehold.it/185x185`
+        poster: movie.poster_path ? `http://image.tmdb.org/t/p/w185${movie.poster_path}` : `http://placehold.it/185x185`,
+        stars: movie.uid ? `<div class=".rateYo"></div>`: `<a id="add-to-watchlist" data-movie-id="${movie.id}" href="#" class="btn btn-primary btn-block">Add To Watchlist</a>`
       };
+
 
       card += `<div class="col-3 each-card">
             <div class="card">
@@ -25,7 +27,7 @@ let domBuilder = {
             </div>
             <hr>
             <p class="card-text">${movie.overview}</p>
-            <a id="add-to-watchlist" data-movie-id="${movie.id}" href="#" class="btn btn-primary btn-block">Add To Watchlist</a>
+            ${currentMovie.stars}
             </div>
             </div>
             </div>`;
