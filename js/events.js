@@ -141,11 +141,21 @@ function logoutSearchBar(){
 
 //watched search bar
 $("#user-watched").on("keydown",(e)=>{
-      $('#user-watched').quicksearch('body');
+  console.log("WATCHED");
+    $('#user-watched').quicksearch('.default_list_data');
+    $('.row').append('.default_list_data');
 });
 //unwatched search bar
 $("#user-unwatched").on("keydown",(e)=>{
-      $('#user-unwatched').quicksearch('body');
+  console.log("UNWATCHED");
+    $('#user-unwatched').quicksearch('.default_list_data');
+    $("#user-unwatched").on("input", ()=>{    
+            let searchfield = $(".default_list_data");
+            $(".row").append(searchfield);
+            return firebase.refresh;
+
+    }
+  );
 });
 
 

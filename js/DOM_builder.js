@@ -16,7 +16,7 @@ let domBuilder = {
       };
 
 
-      card += `<div class="col-3 each-card">
+      card += `<div class="col-3 each-card" data-list=".default_list_data">
             <div class="card">
             <div class="img-wrapper">
             <img class="card-img-top" src="${currentMovie.poster}" alt="Card image cap">
@@ -29,6 +29,7 @@ let domBuilder = {
             </div>
             <hr>
             <p class="card-text">${movie.overview}</p>
+            ${currentMovie.stars}
             <label class="rateYo ${movie.id}"></label>
             </div>
             </div>
