@@ -8,8 +8,6 @@
 //*************************
 //    Star Rating
 //*************************
-// Getter
-// var maxValue = $("#rateYo").rateYo("option", "maxValue");
 
 // $(function () {
 //   $(".rateYo").rateYo({
@@ -35,12 +33,14 @@ $(function () {
     rating: "0",
     starWidth: "25px",
     fullStar: true
+
   })
               .on("rateyo.set", function (e, data) {
  
                   console.log("The rating is set to " + data.rating + "!");
               });
 });
+
 
 
 ;(function ($) {
@@ -1173,3 +1173,5 @@ $(function () {
   $.fn.rateYo = rateYo;
 
 }(window.jQuery));
+
+
