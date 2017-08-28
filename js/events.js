@@ -101,7 +101,6 @@ let Handlers = {
 
 };
 
-<<<<<<< HEAD
 $(document).on("click", "#btn-showWatched", ()=>{
   console.log("WATCHED");
         $('#user-input').hide();
@@ -126,7 +125,7 @@ function logoutSearchBar(){
         $('#user-unwatched').hide();
         $('#user-input').css("display", "block");
 }
-var firebase = require('./firebase_interaction.js');
+
 var options = {
   shouldSort: true,
   threshold: 0.05,
