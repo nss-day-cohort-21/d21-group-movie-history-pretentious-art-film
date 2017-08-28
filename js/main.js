@@ -1,6 +1,7 @@
-'use strict';
+// 'use strict';
 
-const $ = require('jquery');
+// const $ = require('jquery');
+// const rateYo = require('./jquery.rateyo');
 
 const FBInteraction = require('./firebase_interaction');
 const User = require('./user');
