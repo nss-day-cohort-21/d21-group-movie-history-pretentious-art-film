@@ -25,7 +25,7 @@ let domBuilder = {
             </div>
             <hr>
             <p class="card-text">${movie.overview}</p>
-            <a id="add-to-watchlist or detele-movie" data-movie-id="tmdb-id" href="#" class="btn btn-primary btn-block">Add To Watchlist</a>
+            <a data-movie-id="${movie.id}" href="#" class="btn btn-primary btn-block">Add To Watchlist</a>
             </div>
             </div>
             </div>`;
