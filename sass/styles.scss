@@ -185,7 +185,22 @@
   left: 0;
   overflow: hidden;
 }
-.rateYo {
+.each-card {
+  display: flex;
+  justify-content: space-around;
 
-  max-width: 100px;
 }
+
+.card-img-top {
+  display: flex;
+}
+.img-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.text-muted{
+  display: flex;
+  justify-content: center;
+}
+
