@@ -13,8 +13,10 @@ let Handlers = {
   },
 
   /**
-   * Returns search input on keyup.
+   * Search for movies on enter key.
    *
+   * @param {api call} movieCall : ajax call to get movies
+   * @param {function call} domBuilder : function to build cards
    */
   searchTmdbOnKeyUp: function(movieCall, domBuilder) {
     $('#user-input').on('keypress', event => {
@@ -26,6 +28,11 @@ let Handlers = {
       }
     });
   },
+  /**
+   * Add movie to Firebase.
+   *
+   * @param {ajax} movieAjaxCall : ajax call to add movie to Firebase.
+   */
   addMovieToWatchList: function(movieAjaxCall) {
     $(document).on('click', '#add-to-watchlist', function(event) {
       let movieId = $(this).data('movie-id');
@@ -48,6 +55,13 @@ let Handlers = {
       });
     });
   },
+  /**
+   * Build movie object.
+   *
+   * @param {object} movie : movie object
+   * @param {object} actors : actors object
+   * @returns {object} movie with actors : movie with actors
+   */
   buildMovieObj: function(movie, actors) {
     let now = moment();
     let user = User.getCurrentUser();
