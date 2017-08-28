@@ -11,22 +11,36 @@
 // Getter
 // var maxValue = $("#rateYo").rateYo("option", "maxValue");
 
+// $(function () {
+//   $(".rateYo").rateYo({
+//     numStars: 10,
+//     maxValue: 10,
+//     rating: "0",
+//     starWidth: "25px",
+//     fullStar: true
+//   });
+//   // $(".rateYo").click(function (){
+//   // var rating = $rateYo.rateYo("rating");
+//   // return rating;
+//   // console.log("rating", rating);
+//   // });
+
+// });
+
 $(function () {
+ 
   $(".rateYo").rateYo({
     numStars: 10,
     maxValue: 10,
     rating: "0",
     starWidth: "25px",
     fullStar: true
-  });
-  // $(".rateYo").click(function (){
-  // var rating = $rateYo.rateYo("rating");
-  // return rating;
-  // });
-  // console.log("rating", rating);
+  })
+              .on("rateyo.set", function (e, data) {
+ 
+                  console.log("The rating is set to " + data.rating + "!");
+              });
 });
-
-
 
 
 ;(function ($) {
