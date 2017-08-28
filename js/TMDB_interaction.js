@@ -5,10 +5,12 @@ let Api = require('./api.js');
 let User = require('./user');
 
 let dbInteraction = {
+
   /**
-   * Retrieves movie by title. Movie title based on user text in search input.
+   * Get movies from TMDB.
    *
-   * @param {string} userInput : user input in search bar.
+   * @param {string} userInput : search input
+   * @returns {Promise} moviesData : movies object
    */
   getMoviesFromTmdbOnSearch: userInput => {
     return new Promise(function(resolve, reject) {
