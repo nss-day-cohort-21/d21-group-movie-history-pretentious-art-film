@@ -30,6 +30,7 @@ let User = {
     }
   },
   getCurrentUser: function() {
+
     return currentUser;
   },
   getFirebaseConfi: function(){

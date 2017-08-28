@@ -15,9 +15,11 @@ let FBInteraction = {
    */
   getMovies: function(user) {
 		return new Promise((resolve, reject)=>{
+			console.log("config database", `${config.databaseURL}`);
 			$.ajax({
 				url: `${config.databaseURL}/movies.json?orderBy="uid"&equalTo="${user}"`
 			}).done((movieData)=>{
+				console.log('movieData',movieData);
 				resolve(movieData);
 			});
 		});
