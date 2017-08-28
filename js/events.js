@@ -16,15 +16,12 @@ let Handlers = {
    * Returns search input on keyup.
    *
    */
-  searchTmdbOnKeyUp: function(movieCall, actorsCall, domBuilder) {
+  searchTmdbOnKeyUp: function(movieCall, domBuilder) {
     $('#user-input').on('keypress', event => {
       let userInput = $('#user-input');
       if (event.keyCode === 13 && document.activeElement.id === 'user-input') {
         movieCall(userInput.val()).then(movieData => {
-          let moviesId = _.map(movieData, function(movie) {
-            return movie.id;
-          });
-          domBuilder(moviesId);
+          domBuilder(movieData);
         });
       }
     });
@@ -80,10 +77,6 @@ let Handlers = {
 
 Handlers.loginClickEvent();
 Handlers.addMovieToWatchList(dbInteraction.getSingleMovieFromTMDB);
-Handlers.searchTmdbOnKeyUp(
-  dbInteraction.getMoviesFromTmdbOnSearch,
-  dbInteraction.getMovieActors,
-  template.buildMovieCard
-);
+Handlers.searchTmdbOnKeyUp(dbInteraction.getMoviesFromTmdbOnSearch, template.buildMovieCard);
 
 module.exports = Handlers;
