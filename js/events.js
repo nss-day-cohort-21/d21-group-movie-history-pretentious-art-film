@@ -139,23 +139,14 @@ function logoutSearchBar(){
 //   keys: ["title"]
 // };
 
+
 //watched search bar
-$("#user-watched").on("keydown",(e)=>{
-  console.log("WATCHED");
-    $('#user-watched').quicksearch('.default_list_data');
-    $('.row').append('.default_list_data');
+$("input#user-watched").on("keydown",()=>{
+    $('input#user-watched').quicksearch('.card');
 });
 //unwatched search bar
-$("#user-unwatched").on("keydown",(e)=>{
-  console.log("UNWATCHED");
-    $('#user-unwatched').quicksearch('.default_list_data');
-    $("#user-unwatched").on("input", ()=>{    
-            let searchfield = $(".default_list_data");
-            $(".row").append(searchfield);
-            return firebase.refresh;
-
-    }
-  );
+$("#user-unwatched").on("keydown",()=>{
+  $('#user-unwatched').quicksearch('.card');
 });
 
 
@@ -178,7 +169,7 @@ $('#btn-showUnWatched').on('click', ()=>{
           console.log(startarget);
           let rating = $(startarget).rateYo("rating") * 2;
           console.log(rating);
-          Handlers.addMovieToWatchList(rating)
+          Handlers.addMovieToWatchList(rating);
       });
 
 
@@ -188,7 +179,7 @@ $('#btn-showUnWatched').on('click', ()=>{
       return Promise.all([moviesPromise, actorsPromise]).then(data => {
           let movie = data[0];
           let actors = data[1];
-          let movieObj = Handlers.buildMovieObj(movie, actors, starRating);
+          let movieObj = Handlers.buildMovieObj(movie, actors);
 
           dbInteraction
               .addMovieToFirebase(movieObj)
@@ -216,9 +207,9 @@ $('#btn-showUnWatched').on('click', ()=>{
 
 
 
-
 Handlers.loginClickEvent();
 Handlers.addMovieToWatchList(dbInteraction.getSingleMovieFromTMDB);
 Handlers.searchTmdbOnKeyUp(dbInteraction.getMoviesFromTmdbOnSearch, template.buildMovieCard);
+});
 
 module.exports = Handlers;
