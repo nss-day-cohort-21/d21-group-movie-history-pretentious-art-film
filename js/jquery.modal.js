@@ -13,7 +13,7 @@
     factory(require("jquery"), window, document);
   }
   else {
-    factory(jQuery, window, document);
+    // factory(jQuery, window, document);
   }
 }(function($, window, document, undefined) {
 
