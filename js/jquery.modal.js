@@ -3,7 +3,8 @@
     Version 0.8.2
 */
 "use strict";
-// let jQuery = require('jquery');
+
+// const jQuery = require('jquery');
 
 (function (factory) {
   // Making your jQuery plugin work better with npm tools
@@ -12,7 +13,7 @@
     factory(require("jquery"), window, document);
   }
   else {
-    factory(jQuery, window, document);
+    // factory(jQuery, window, document);
   }
 }(function($, window, document, undefined) {
 

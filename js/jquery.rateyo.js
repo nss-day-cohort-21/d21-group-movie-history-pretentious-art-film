@@ -1,11 +1,50 @@
+  "use strict";
 /*****
 * rateYo - v2.3.2
 * http://prrashi.github.io/rateyo/
 * Copyright (c) 2014 Prashanth Pamidi; Licensed MIT
 *****/
 
+//*************************
+//    Star Rating
+//*************************
+
+// $(function () {
+//   $(".rateYo").rateYo({
+//     numStars: 10,
+//     maxValue: 10,
+//     rating: "0",
+//     starWidth: "25px",
+//     fullStar: true
+//   });
+//   // $(".rateYo").click(function (){
+//   // var rating = $rateYo.rateYo("rating");
+//   // return rating;
+//   // console.log("rating", rating);
+//   // });
+
+// });
+
+$(function () {
+ 
+  $(".rateYo").rateYo({
+    numStars: 10,
+    maxValue: 10,
+    rating: "0",
+    starWidth: "25px",
+    fullStar: true
+
+  })
+              .on("rateyo.set", function (e, data) {
+ 
+                  console.log("The rating is set to " + data.rating + "!");
+              });
+});
+
+
+
 ;(function ($) {
-  "use strict";
+
 
   // The basic svg string required to generate stars
   var BASICSTAR = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"+
@@ -1134,3 +1173,5 @@
   $.fn.rateYo = rateYo;
 
 }(window.jQuery));
+
+
