@@ -4,6 +4,7 @@ let moment = require('moment');
 let dbInteraction = require('./TMDB_interaction.js');
 let User = require('./user');
 let template = require('./DOM_builder');
+let firebase = require('./firebase_interaction');
 
 let Handlers = {
   loginClickEvent: function() {
@@ -83,8 +84,40 @@ let Handlers = {
       uid: user.uid
     };
     return movieObj;
-  }
+  },
+
+  showUnwatched: function (){
+    return new Promise ((resolve)=>{
+      console.log("getCurrentUser", User.getCurrentUser());
+          firebase.getMovies(User.getCurrentUser().uid).then((item)=>{
+              console.log('item', item);
+              resolve(item);
+          });
+
+        });
+    },
+
 };
+
+
+$('#btn-showUnWatched').on('click', ()=>{
+  let watchListArray = [];
+  Handlers.showUnwatched().then((item)=>{
+    template.buildMovieCard(item);
+    console.log('watchlistItem type of', typeof item);
+    console.log('watchListArray', item);
+    item.forEach((items)=>{
+      console.log('items.each', items);
+      watchListArray.push(items);
+      // watchListArray.push(items);
+
+    });
+  });
+  // console.log('typeof', typeof watchListArray);
+  template.buildMovieCard(watchListArray);
+});
+
+
 
 Handlers.loginClickEvent();
 Handlers.addMovieToWatchList(dbInteraction.getSingleMovieFromTMDB);
