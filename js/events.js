@@ -76,14 +76,17 @@ let Handlers = {
     let movieObj = {
       actors: actorsArray,
       genre: genresArray,
-      poster_thumbnail: `http://image.tmdb.org/t/p/w185${movie.poster_path}`,
-      poster_large: `http://image.tmdb.org/t/p/w780${movie.poster_path}`,
+      poster_thumbnail: `${movie.poster_path}`,
+      poster_path: `${movie.poster_path}`,
       rating: 0,
-      title: movie.original_title,
-      year: movie.release_date,
+      original_title: movie.original_title,
+      release_date: movie.release_date,
       favorite: false,
       time_stamp: now.format(),
-      uid: user.uid
+      uid: user.uid,
+      id: movie.id,
+      overview: movie.overview
+      // star
     };
     return movieObj;
   },
@@ -149,18 +152,23 @@ $("#user-unwatched").on("keydown",(e)=>{
 $('#btn-showUnWatched').on('click', ()=>{
   let watchListArray = [];
   Handlers.showUnwatched().then((item)=>{
-    template.buildMovieCard(item);
-    console.log('watchlistItem type of', typeof item);
-    console.log('watchListArray', item);
-    item.forEach((items)=>{
-      console.log('items.each', items);
-      watchListArray.push(items);
-      // watchListArray.push(items);
+  
+    for( var prop in item) {
 
-    });
+    console.log("what is watchlist arr", watchListArray);
+  template.buildMovieCard(item);
+        
+    }
+
+      
+    // item.forEach((items)=>{
+    //   console.log('items.each', items);
+    //   watchListArray.push(items);
+    //   // watchListArray.push(items);
+
+    // });
   });
   // console.log('typeof', typeof watchListArray);
-  template.buildMovieCard(watchListArray);
 });
 
 
