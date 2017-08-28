@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 // const $ = require('jquery');
 // const rateYo = require('./jquery.rateyo');
