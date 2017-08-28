@@ -33,15 +33,14 @@ let Handlers = {
       let actorsPromise = dbInteraction.getMovieActors(movieId);
       return Promise.all([moviesPromise, actorsPromise]).then(data => {
         let movie = data[0];
-        let actors = data[1].cast;
-
+        let actors = data[1];
         let movieObj = Handlers.buildMovieObj(movie, actors);
 
         dbInteraction
           .addMovieToFirebase(movieObj)
           .then(function(movie) {
             // Populate the DOM
-            // console.log('Added Movie: ', movie);
+            console.log('Added Movie: ', movie);
           })
           .catch(error => {
             console.warn('ERROR: ', error.code, error.message);
@@ -52,9 +51,7 @@ let Handlers = {
   buildMovieObj: function(movie, actors) {
     let now = moment();
     let user = User.getCurrentUser();
-    let actorsArray = _.map(actors, function(actor) {
-      return actor.name;
-    });
+    let actorsArray = actors;
     let genresArray = _.map(movie.genres, function(genre) {
       return genre.name;
     });
