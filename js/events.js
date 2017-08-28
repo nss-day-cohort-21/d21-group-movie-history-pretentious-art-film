@@ -36,7 +36,7 @@ let Handlers = {
    *
    * @param {ajax} movieAjaxCall : ajax call to add movie to Firebase.
    */
-  addMovieToWatchList: function(movieAjaxCall) {
+  addMovieToWatchList: function(movieAjaxCall, starRating) {
     $(document).on('click', '#add-to-watchlist', function(event) {
       let movieId = $(this).data('movie-id');
       let moviesPromise = dbInteraction.getSingleMovieFromTMDB(movieId);
@@ -44,7 +44,7 @@ let Handlers = {
       return Promise.all([moviesPromise, actorsPromise]).then(data => {
         let movie = data[0];
         let actors = data[1];
-        let movieObj = Handlers.buildMovieObj(movie, actors);
+        let movieObj = Handlers.buildMovieObj(movie, actors, starRating);
 
         dbInteraction
           .addMovieToFirebase(movieObj)
@@ -65,7 +65,7 @@ let Handlers = {
    * @param {object} actors : actors object
    * @returns {object} movie with actors : movie with actors
    */
-  buildMovieObj: function(movie, actors) {
+  buildMovieObj: function(movie, actors, starRating) {
     let now = moment();
     let user = User.getCurrentUser();
     let actorsArray = actors;
@@ -85,8 +85,8 @@ let Handlers = {
       time_stamp: now.format(),
       uid: user.uid,
       id: movie.id,
-      overview: movie.overview
-      // star
+      overview: movie.overview,
+      starRating: starRating
     };
     return movieObj;
   },
@@ -170,7 +170,40 @@ $('#btn-showUnWatched').on('click', ()=>{
         
     }
 
-      
+
+      $(document).on("click",".rateYo",(e)=> {
+          let startarget = e.currentTarget;
+          let movieId = $(startarget).data("movie");
+          console.log(movieId);
+          console.log(startarget);
+          let rating = $(startarget).rateYo("rating") * 2;
+          console.log(rating);
+          Handlers.addMovieToWatchList(rating)
+      });
+
+
+      let movieId = $(this).data('movie-id');
+      let moviesPromise = dbInteraction.getSingleMovieFromTMDB(movieId);
+      let actorsPromise = dbInteraction.getMovieActors(movieId);
+      return Promise.all([moviesPromise, actorsPromise]).then(data => {
+          let movie = data[0];
+          let actors = data[1];
+          let movieObj = Handlers.buildMovieObj(movie, actors, starRating);
+
+          dbInteraction
+              .addMovieToFirebase(movieObj)
+              .then(function(movie) {
+                  // Populate the DOM
+                  console.log('Added Movie: ', movie);
+              })
+              .catch(error => {
+                  console.warn('ERROR: ', error.code, error.message);
+              });
+
+
+
+
+
     // item.forEach((items)=>{
     //   console.log('items.each', items);
     //   watchListArray.push(items);
