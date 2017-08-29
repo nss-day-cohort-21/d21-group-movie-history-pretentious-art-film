@@ -28,7 +28,7 @@ let domBuilder = {
             <div class="card-body">
             <div class="d-flex w-100 justify-content-between">
 
-            <small class="text-muted">${movie.release_date}</small>
+            <small>${movie.release_date}</small>
             </div>
             <hr>
             <h2 class="card-text">${movie.original_title}</h2>
