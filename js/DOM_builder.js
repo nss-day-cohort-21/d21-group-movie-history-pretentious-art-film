@@ -36,7 +36,7 @@ var starRating =[];
 
 
       };
-      card += `<div class="col-3 each-card" data-list=".default_list_data">
+      card += `<div class="col-6 each-card" id="builderHelp">
             <div class="card">
             <div class="img-wrapper">
             <img class="card-img-top" src="${currentMovie.poster}" alt="Card image cap">
