@@ -3,6 +3,17 @@
 let _ = require('lodash');
 let tmdbInteractions = require('./TMDB_interaction');
 
+
+/*SLIDER*/
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+};
+
+
 let domBuilder = {
   buildMovieCard: function(movieData) {
     var keys = Object.keys(movieData);
@@ -100,7 +111,6 @@ starRating.forEach((item, index)=>{
     $('#card-wrapper').html(movieHtml);
   }
 };
-
 
 
 module.exports = domBuilder;
