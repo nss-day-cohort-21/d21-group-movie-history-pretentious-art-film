@@ -116,7 +116,7 @@ $(document).on("click", "#btn-showUnWatched", ()=>{
         $('#user-unwatched').css("display", "block");
  });
 
-$(document).on("click", "#btn-normSearch", ()=>{
+$(document).on("click", "#btn-showUnTracked", ()=>{
   console.log("UNWATCHED");
         $('#user-watched').hide();
         $('#user-unwatched').hide();
@@ -148,6 +148,8 @@ $("input#user-watched").on("keydown",()=>{
 $("#user-unwatched").on("keydown",()=>{
   $('#user-unwatched').quicksearch('.card');
 });
+
+
 
 
 $('#btn-showUnWatched').on('click', ()=>{

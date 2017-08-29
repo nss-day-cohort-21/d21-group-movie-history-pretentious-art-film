@@ -20,6 +20,3 @@ function getMovies(user) {
 
 
 module.exports = {getMovies};
-
-
-//

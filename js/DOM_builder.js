@@ -25,6 +25,7 @@ let domBuilder = {
             <small class="text-muted">${movie.release_date}</small>
             </div>
             <hr>
+            <h2 class="card-text">${movie.original_title}</h2>
             <p class="card-text">${movie.overview}</p>
             ${currentMovie.stars}
             <label class="rateYo ${movie.id}"></label>
