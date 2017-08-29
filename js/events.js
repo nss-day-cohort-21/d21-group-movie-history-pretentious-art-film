@@ -197,7 +197,42 @@ $(document).on("click",".rateYo",(e)=> {
     // Handlers.addMovieToWatchList(rating);
 });
 
+$('#btn-showWatched').on('click', ()=>{
+  let watchListArray = [];
+  Handlers.showUnwatched().then((item)=> {
 
+      for (var prop in item) {
+
+          console.log("what is watchlist arr", watchListArray);
+          // if(movieObj.starRating !== null){
+          template.buildMovieCard(item);
+        // }
+
+      }
+  });
+        let movieId = $(this).data('movie-id');
+      let moviesPromise = dbInteraction.getSingleMovieFromTMDB(movieId);
+      let actorsPromise = dbInteraction.getMovieActors(movieId);
+      return Promise.all([moviesPromise, actorsPromise]).then(data => {
+          let movie = data[0];
+          let actors = data[1];
+          let movieObj = Handlers.buildMovieObj(movie, actors);
+          movieObj.starRating = realStars;
+          console.log('movieobj', movieObj);
+
+
+          dbInteraction
+              .addMovieToFirebase(movieObj)
+              .then(function(movie) {
+                  // Populate the DOM
+                  console.log('Added Movie: ', movie);
+              })
+              .catch(error => {
+                  console.warn('ERROR: ', error.code, error.message);
+              });
+
+});
+});
 
 $('#btn-showUnWatched').on('click', ()=>{
   let watchListArray = [];
@@ -206,7 +241,9 @@ $('#btn-showUnWatched').on('click', ()=>{
       for (var prop in item) {
 
           console.log("what is watchlist arr", watchListArray);
+          // if(movieObj.starRating == null){
           template.buildMovieCard(item);
+        // }
 
       }
   });
