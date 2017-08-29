@@ -12,6 +12,7 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 let currentUser;
 
+
 function addPhotoAfterLogin (userObj) {
   console.log("userObj photo", userObj.photoURL);
   $("#profile-image-anchor").append(
@@ -55,5 +56,6 @@ let User = {
     return config;
   }
 };
+
 
 module.exports = User;

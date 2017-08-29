@@ -6,12 +6,12 @@ let User = require('./user');
 let template = require('./DOM_builder');
 let firebase = require('./firebase_interaction');
 
-
+//MAKE LOGIN BUTTON WORK
 $('#btn-login').click(event => {
       logoutSearchBar();
       User.logInLogOut();
     });
-
+//LOGIN API AND ADD MOVIES FUNCTIONALITY
 let Handlers = {
   loginClickEvent: function() {
     $('#btn-login').click(event => {
@@ -110,13 +110,17 @@ let Handlers = {
 
 };
 
-
+//SET UP NAV BUTTONS 
 $(document).on("click", "#btn-showWatched", ()=>{
   console.log("WATCHED");
         $('#user-input').hide();
         $('#user-unwatched').hide();
         $('#user-watched').css("display", "block");
+        if (User.getCurrentUser() == null) {
+        $('#slidecontainer').css("display", "none");
+        } else {
         $('#slidecontainer').css("display", "block");
+      }
  });
 $(document).on("click", "#btn-showUnWatched", ()=>{
         $('#user-watched').hide();
@@ -151,17 +155,17 @@ function logoutSearchBar(){
 // };
 
 
-//watched search bar
+//QUICK SEARCH SET UP FOR WATCHED
 $("input#user-watched").on("keydown",()=>{
     $('input#user-watched').quicksearch('.card');
 });
-//unwatched search bar
+//QUICK SEARCH SET UP FOR UNWATCHED
 $("#user-unwatched").on("keydown",()=>{
   $('#user-unwatched').quicksearch('.card');
 });
 
 
-
+//STARS!!!!
 var realStars = 0;
 
 $(document).on("click",".rateYo",(e)=> {
@@ -184,8 +188,43 @@ $(document).on("click",".rateYo",(e)=> {
     // Handlers.addMovieToWatchList(rating);
 });
 
+$('#btn-showWatched').on('click', ()=>{
+  let watchListArray = [];
+  Handlers.showUnwatched().then((item)=> {
+
+      for (var prop in item) {
+
+          console.log("what is watchlist arr", watchListArray);
+          // if(movieObj.starRating !== null){
+          template.buildMovieCard(item);
+        // }
+
+      }
+  });
+        let movieId = $(this).data('movie-id');
+      let moviesPromise = dbInteraction.getSingleMovieFromTMDB(movieId);
+      let actorsPromise = dbInteraction.getMovieActors(movieId);
+      return Promise.all([moviesPromise, actorsPromise]).then(data => {
+          let movie = data[0];
+          let actors = data[1];
+          let movieObj = Handlers.buildMovieObj(movie, actors);
+          movieObj.starRating = realStars;
+          console.log('movieobj', movieObj);
 
 
+          dbInteraction
+              .addMovieToFirebase(movieObj)
+              .then(function(movie) {
+                  // Populate the DOM
+                  console.log('Added Movie: ', movie);
+              })
+              .catch(error => {
+                  console.warn('ERROR: ', error.code, error.message);
+              });
+
+});
+});
+//SETTING UP RATED MOVIES!!! 
 $('#btn-showUnWatched').on('click', ()=>{
   let watchListArray = [];
   Handlers.showUnwatched().then((item)=> {
@@ -193,7 +232,9 @@ $('#btn-showUnWatched').on('click', ()=>{
       for (var prop in item) {
 
           console.log("what is watchlist arr", watchListArray);
+          // if(movieObj.starRating == null){
           template.buildMovieCard(item);
+        // }
 
       }
   });
