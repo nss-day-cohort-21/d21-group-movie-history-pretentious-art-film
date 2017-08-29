@@ -12,6 +12,7 @@
         crossorigin="anonymous">
 
     <link rel="stylesheet" href="./css/main.css">
+    
 
 </head>
 
@@ -64,6 +65,14 @@
             <button id="btn-showWatched" type="button" class="btn btn-info btn-lg ml-1 mr-1 btn-filter">Show Watched</button>
             <button id="btn-Favorites" type="button" class="btn btn-warning btn-lg ml-1 mr-1 btn-filter">Favorites</button>
         </div>
+
+        <!-- slider -->
+
+        <div id="slidecontainer" style="display: none;">
+            <p>Stars: <span id="demo"></span></p>
+            <input type="range" min="0" max="10" value="0" class="slider" id="myRange">
+        </div>
+
         <!-- 3 Movie Lists -->
         <div id="card-wrapper" class="row">
             <!-- Movie Cards Demo -->
@@ -103,6 +112,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
             crossorigin="anonymous"></script>
         <script src="//localhost:35729/livereload.js?snipver=1" async="" defer=""></script>
+
+        
         <!-- Modal JS -->
         <script type="text/javascript" src="./js/jquery.modal.js"></script>
         <script src="./dist/app.js"></script>

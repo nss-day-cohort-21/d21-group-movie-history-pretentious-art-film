@@ -6,6 +6,11 @@ let User = require('./user');
 let template = require('./DOM_builder');
 let firebase = require('./firebase_interaction');
 
+$('#btn-login').click(event => {
+      logoutSearchBar();
+      User.logInLogOut();
+    });
+
 let Handlers = {
   loginClickEvent: function() {
     $('#btn-login').click(event => {
@@ -13,6 +18,7 @@ let Handlers = {
       User.logInLogOut();
     });
   },
+
 
   /**
    * Search for movies on enter key.
@@ -104,16 +110,19 @@ let Handlers = {
 
 };
 
+
 $(document).on("click", "#btn-showWatched", ()=>{
   console.log("WATCHED");
         $('#user-input').hide();
         $('#user-unwatched').hide();
         $('#user-watched').css("display", "block");
+        $('#slidecontainer').css("display", "block");
  });
 $(document).on("click", "#btn-showUnWatched", ()=>{
         $('#user-watched').hide();
         $('#user-input').hide();
         $('#user-unwatched').css("display", "block");
+        $('#slidecontainer').hide();
  });
 
 $(document).on("click", "#btn-showUnTracked", ()=>{
@@ -121,12 +130,14 @@ $(document).on("click", "#btn-showUnTracked", ()=>{
         $('#user-watched').hide();
         $('#user-unwatched').hide();
         $('#user-input').css("display", "block");
+        $('#slidecontainer').hide();
  });
 
 function logoutSearchBar(){
         $('#user-watched').hide();
         $('#user-unwatched').hide();
         $('#user-input').css("display", "block");
+        $('#slidecontainer').hide();
 }
 
 // var options = {
