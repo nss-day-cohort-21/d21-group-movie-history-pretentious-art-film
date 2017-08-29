@@ -75,6 +75,7 @@ let dbInteraction = {
         data: JSON.stringify(movieObj),
         dataType: 'json'
       }).done(function(movie) {
+        console.log('Movie Ajax', movie);
         resolve(movie);
       });
     });
