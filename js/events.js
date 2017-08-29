@@ -6,6 +6,7 @@ let User = require('./user');
 let template = require('./DOM_builder');
 let firebase = require('./firebase_interaction');
 
+
 let Handlers = {
   loginClickEvent: function() {
     $('#btn-login').click(event => {
@@ -148,6 +149,7 @@ $("input#user-watched").on("keydown",()=>{
 $("#user-unwatched").on("keydown",()=>{
   $('#user-unwatched').quicksearch('.card');
 });
+
 
 
 
