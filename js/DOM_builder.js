@@ -13,7 +13,7 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 };
 
-
+//SETS UP AND BUILDS THE CARDS
 let domBuilder = {
   buildMovieCard: function(movieData) {
     var keys = Object.keys(movieData);

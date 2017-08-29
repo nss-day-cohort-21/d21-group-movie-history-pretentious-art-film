@@ -6,12 +6,12 @@ let User = require('./user');
 let template = require('./DOM_builder');
 let firebase = require('./firebase_interaction');
 
-
+//MAKE LOGIN BUTTON WORK
 $('#btn-login').click(event => {
       logoutSearchBar();
       User.logInLogOut();
     });
-
+//LOGIN API AND ADD MOVIES FUNCTIONALITY
 let Handlers = {
   loginClickEvent: function() {
     $('#btn-login').click(event => {
@@ -110,13 +110,14 @@ let Handlers = {
 
 };
 
-
+//SET UP NAV BUTTONS 
 $(document).on("click", "#btn-showWatched", ()=>{
   console.log("WATCHED");
         $('#user-input').hide();
         $('#user-unwatched').hide();
         $('#user-watched').css("display", "block");
-        if (User.currentUser == null) {
+        if (User.getCurrentUser() == null) {
+        $('#slidecontainer').css("display", "none");
         } else {
         $('#slidecontainer').css("display", "block");
       }
@@ -154,17 +155,17 @@ function logoutSearchBar(){
 // };
 
 
-//watched search bar
+//QUICK SEARCH SET UP FOR WATCHED
 $("input#user-watched").on("keydown",()=>{
     $('input#user-watched').quicksearch('.card');
 });
-//unwatched search bar
+//QUICK SEARCH SET UP FOR UNWATCHED
 $("#user-unwatched").on("keydown",()=>{
   $('#user-unwatched').quicksearch('.card');
 });
 
 
-
+//STARS!!!!
 var realStars = 0;
 
 $(document).on("click",".rateYo",(e)=> {
@@ -233,7 +234,7 @@ $('#btn-showWatched').on('click', ()=>{
 
 });
 });
-
+//SETTING UP RATED MOVIES!!! 
 $('#btn-showUnWatched').on('click', ()=>{
   let watchListArray = [];
   Handlers.showUnwatched().then((item)=> {
