@@ -183,14 +183,15 @@ $("#user-unwatched").on("keydown",(e)=>{
 
 $('#btn-showUnWatched').on('click', ()=>{
   let watchListArray = [];
-  Handlers.showUnwatched().then((item)=>{
-  
-    for( var prop in item) {
+  Handlers.showUnwatched().then((item)=> {
 
-    console.log("what is watchlist arr", watchListArray);
-  template.buildMovieCard(item);
-        
-    }
+      for (var prop in item) {
+
+          console.log("what is watchlist arr", watchListArray);
+          template.buildMovieCard(item);
+
+      }
+  });
 
 
       $(document).on("click",".rateYo",(e)=> {
@@ -200,7 +201,7 @@ $('#btn-showUnWatched').on('click', ()=>{
           console.log(startarget);
           let rating = $(startarget).rateYo("rating") * 2;
           console.log(rating);
-          Handlers.addMovieToWatchList(rating)
+          Handlers.addMovieToWatchList(rating);
       });
 
 
@@ -210,7 +211,7 @@ $('#btn-showUnWatched').on('click', ()=>{
       return Promise.all([moviesPromise, actorsPromise]).then(data => {
           let movie = data[0];
           let actors = data[1];
-          let movieObj = Handlers.buildMovieObj(movie, actors, starRating);
+          let movieObj = Handlers.buildMovieObj(movie, actors);
 
           dbInteraction
               .addMovieToFirebase(movieObj)
