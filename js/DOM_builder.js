@@ -12,7 +12,8 @@ let domBuilder = {
       for (var prop in movieData){
         uglyId = prop;
       }
-    _.forEach(movieData, function(movie) {
+    _.forEach(movieData, function(movie,index) {
+      console.log("index",index);
       let currentMovie = {
         poster: movie.poster_path ? `http://image.tmdb.org/t/p/w185${movie.poster_path}` : `http://placehold.it/185x185`,
         stars: movie.uid ? `<div class="rateYo" data-movie="${movie.id}"></div>`: `<a id="add-to-watchlist" data-movie-id="${movie.id}" href="#" class="btn btn-primary btn-block">Add To Watchlist</a><a id="$\{prop}" data-movie-id="tmdb-id" href="#" class="btn btn-danger">Remove From List</a> `
@@ -36,6 +37,7 @@ let domBuilder = {
              </div>
             </div>
             </div>`;
+            console.log("movie.indeex", movie.index);
     });
     console.log(movieData);
 
