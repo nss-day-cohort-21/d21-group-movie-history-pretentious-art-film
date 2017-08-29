@@ -116,7 +116,7 @@ $(document).on("click", "#btn-showUnWatched", ()=>{
         $('#user-unwatched').css("display", "block");
  });
 
-$(document).on("click", "#btn-normSearch", ()=>{
+$(document).on("click", "#btn-showUnTracked", ()=>{
   console.log("UNWATCHED");
         $('#user-watched').hide();
         $('#user-unwatched').hide();
@@ -129,56 +129,27 @@ function logoutSearchBar(){
         $('#user-input').css("display", "block");
 }
 
-var options = {
-  shouldSort: true,
-  threshold: 0.05,
-  location: 0,
-  distance: 100,
-  maxPatternLength: 32,
-  minMatchCharLength: 1,
-  keys: ["title"]
-};
+// var options = {
+//   shouldSort: true,
+//   threshold: 0.05,
+//   location: 0,
+//   distance: 100,
+//   maxPatternLength: 32,
+//   minMatchCharLength: 1,
+//   keys: ["title"]
+// };
+
 
 //watched search bar
-$("#user-watched").on("keydown",(e)=>{
-    if (e.keyCode == 13) {
-        e.preventDefault();
-        let search = $("#user-watched").val();
-        firebase.getMovies(User.getCurrentUser(search))
-        .then((data)=>{
-            let carddata = data;
-            let array = $.map(data, function(value, index) {
-                return [value];
-            });
-            var fuse = new Fuse(array, options);
-            let result = fuse.search(search);
-            template.buildMovieCard(result);
-        }
-    );
-}});
+$("input#user-watched").on("keydown",()=>{
+    $('input#user-watched').quicksearch('.card');
+});
 //unwatched search bar
-$("#user-unwatched").on("keydown",(e)=>{
-    if (e.keyCode == 13) {
-      console.log("got here passed the enter");
-        e.preventDefault();
-        let search = $("#user-unwatched").val();
-        firebase.getMovies(User.getCurrentUser(search))
-        .then((data)=>{
-          console.log("inside the .then");
-            let carddata = data;
-            let array = $.map(data, function(value, index) {
-              console.log("array being made");
-              console.log("whats in the array", array);
-                return [value];
-            });
-            var fuse = new Fuse(array, options);
-            console.log("search happening");
-            let result = fuse.search(search);
-            template.buildMovieCard(result);
-            console.log("put into builder");
-        }
-    );
-}});
+$("#user-unwatched").on("keydown",()=>{
+  $('#user-unwatched').quicksearch('.card');
+});
+
+
 
 
 $('#btn-showUnWatched').on('click', ()=>{
@@ -200,7 +171,7 @@ $('#btn-showUnWatched').on('click', ()=>{
           console.log(startarget);
           let rating = $(startarget).rateYo("rating") * 2;
           console.log(rating);
-          Handlers.addMovieToWatchList(rating)
+          Handlers.addMovieToWatchList(rating);
       });
 
 
@@ -210,7 +181,7 @@ $('#btn-showUnWatched').on('click', ()=>{
       return Promise.all([moviesPromise, actorsPromise]).then(data => {
           let movie = data[0];
           let actors = data[1];
-          let movieObj = Handlers.buildMovieObj(movie, actors, starRating);
+          let movieObj = Handlers.buildMovieObj(movie, actors);
 
           dbInteraction
               .addMovieToFirebase(movieObj)
@@ -238,9 +209,9 @@ $('#btn-showUnWatched').on('click', ()=>{
 
 
 
-
 Handlers.loginClickEvent();
 Handlers.addMovieToWatchList(dbInteraction.getSingleMovieFromTMDB);
 Handlers.searchTmdbOnKeyUp(dbInteraction.getMoviesFromTmdbOnSearch, template.buildMovieCard);
+});
 
 module.exports = Handlers;
