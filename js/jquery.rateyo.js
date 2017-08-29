@@ -1,4 +1,4 @@
-  "use strict";
+"use strict";
 /*****
 * rateYo - v2.3.2
 * http://prrashi.github.io/rateyo/
