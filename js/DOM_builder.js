@@ -29,6 +29,13 @@ var starRating =[];
 
 
     _.forEach(movieData, function(movie, index) {
+      var date = new Date(`${movie.release_date}`);
+      var curr_date = date.getDate();
+      var curr_month = date.getMonth();
+      var curr_year = date.getFullYear();
+      var finalDate = '' + curr_month  + '/' +curr_date + '/' + curr_year;
+      console.log("newDate", finalDate);
+
         // for (var prop in movieData){
         //   uglyId.push(prop);
     // }
@@ -47,7 +54,7 @@ var starRating =[];
             <div class="card-body">
             <div class="d-flex w-100 justify-content-between">
 
-            <small>${movie.release_date}</small>
+            <small>${finalDate}</small>
             </div>
             <hr>
             <h2 class="card-text">${movie.original_title}</h2>

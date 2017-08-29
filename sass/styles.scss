@@ -2,6 +2,7 @@
 /*FONTS
 ======*/
 p{
+  color: #141414;
   font-family: 'Space Mono', monospace;
 }
 h2{
@@ -92,6 +93,7 @@ body{
   margin: 0px;
   border: 0px solid black;
   font-family: 'Space Mono', monospace;
+  color: #141414;
 }
 .btn-group-lg>.btn, .btn-lg{
   padding: 0em !important;
@@ -102,16 +104,13 @@ body{
   box-shadow: 2px 5px 20px 5px;
   opacity: .8;
   border-radius: 15px;
-  border-width: 5px;
+  border-width: 2px;
   border-color: #27896d;
 }
 
 @media (max-width: 1000px){
   .card{
     display: block !important;
-  }
-  .card img{
-    background-size: contain !important;
   }
 }
 
@@ -321,6 +320,8 @@ body{
 
 .card-img-top {
   display: flex;
+  height: 100%;
+  width: 75%;
 }
 .img-wrapper {
   display: flex;
@@ -332,3 +333,7 @@ body{
   justify-content: center;
 }
 
+#card-wrapper{
+  overflow-y: scroll;
+  height: 80vh;
+}
