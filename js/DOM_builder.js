@@ -21,7 +21,7 @@ var starRating =[];
 
       let currentMovie = {
         poster: movie.poster_path ? `http://image.tmdb.org/t/p/w185${movie.poster_path}` : `http://placehold.it/185x185`,
-        stars: movie.uid ? `<a data-movie-id="tmdb-id" href="#" class="btn btn-danger">Remove From List</a>`: `<a id="add-to-watchlist" data-movie-id="${movie.id}" href="#" class="btn btn-primary btn-block">Add To Watchlist</a> `
+        stars: movie.uid ? `<a id="${index}" data-movie-id="tmdb-id" href="#" class="btn btn-danger">Remove From List</a>`: `<a id="add-to-watchlist" data-movie-id="${movie.id}" href="#" class="btn btn-primary btn-block">Add To Watchlist</a> `
 
 
       };
@@ -54,6 +54,9 @@ var starRating =[];
 
 
     domBuilder.writeCardToDom(card);
+
+
+
 starRating.forEach((item, index)=>{
 
   console.log('what were looking for', movieData[keys[index]].id);
@@ -66,6 +69,29 @@ starRating.forEach((item, index)=>{
 
         console.log("The rating is set to " + data.rating *2 + "!");
     });
+
+
+
+    $('#' + keys[index]).on("click", (event)=>{
+// let key = event.target.
+
+        $.ajax({
+            url: `https://movie-list-bb8f4.firebaseio.com/movies/${keys[index]}/.json`,
+            method: "DELETE"
+        })
+            .done(function(response) {
+                // deleteself(event);
+                // console.log("response after deletion", response);
+                // You'll likely want to execute the code that you're using
+                // on page load here to run the GET XHR and bind to Handlebars
+            });
+    });
+
+
+
+
+
+
 
 });
   },
