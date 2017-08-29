@@ -70,7 +70,7 @@ let Handlers = {
    * @param {object} actors : actors object
    * @returns {object} movie with actors : movie with actors
    */
-  buildMovieObj: function(movie, actors, starRating) {
+  buildMovieObj: function(movie, actors) {
     let now = moment();
     let user = User.getCurrentUser();
     let actorsArray = actors;
@@ -91,7 +91,6 @@ let Handlers = {
       uid: user.uid,
       id: movie.id,
       overview: movie.overview,
-      starRating: starRating
     };
     return movieObj;
   },
@@ -156,29 +155,52 @@ $("#user-unwatched").on("keydown",()=>{
 
 
 
+var realStars = 0;
+
+$(document).on("click",".rateYo",(e)=> {
+    let startarget = e.currentTarget;
+    let movieId = $(startarget).data("movie");
+    console.log('movieId', movieId);
+    let rating = $(startarget).rateYo("rating") * 2;
+    realStars = rating;
+    console.log(rating);
+    let moviesPromise = dbInteraction.getSingleMovieFromTMDB(movieId);
+    let actorsPromise = dbInteraction.getMovieActors(movieId);
+    return Promise.all([moviesPromise, actorsPromise]).then(data => {
+        let movie = data[0];
+        let actors = data[1];
+        let movieObj = Handlers.buildMovieObj(movie, actors);
+        movieObj.starRating = realStars;
+        dbInteraction
+            .addMovieToFirebase(movieObj)
+            .then(function (movie) {
+                // Populate the DOM
+                console.log('Added Movie: ', movie);
+            })
+            .catch(error => {
+                console.warn('ERROR: ', error.code, error.message);
+            });
+
+    });
+    // console.log(movieId);
+    // console.log(startarget);
+    // Handlers.addMovieToWatchList(rating);
+});
+
 
 
 $('#btn-showUnWatched').on('click', ()=>{
   let watchListArray = [];
-  Handlers.showUnwatched().then((item)=>{
-  
-    for( var prop in item) {
+  Handlers.showUnwatched().then((item)=> {
 
-    console.log("what is watchlist arr", watchListArray);
-  template.buildMovieCard(item);
-        
-    }
+      for (var prop in item) {
 
+          console.log("what is watchlist arr", watchListArray);
+          template.buildMovieCard(item);
 
-      $(document).on("click",".rateYo",(e)=> {
-          let startarget = e.currentTarget;
-          let movieId = $(startarget).data("movie");
-          console.log(movieId);
-          console.log(startarget);
-          let rating = $(startarget).rateYo("rating") * 2;
-          console.log(rating);
-          Handlers.addMovieToWatchList(rating);
-      });
+      }
+  });
+
 
 
       let movieId = $(this).data('movie-id');
@@ -188,6 +210,9 @@ $('#btn-showUnWatched').on('click', ()=>{
           let movie = data[0];
           let actors = data[1];
           let movieObj = Handlers.buildMovieObj(movie, actors);
+          movieObj.starRating = realStars;
+          console.log('movieobj', movieObj);
+
 
           dbInteraction
               .addMovieToFirebase(movieObj)
@@ -218,6 +243,5 @@ $('#btn-showUnWatched').on('click', ()=>{
 Handlers.loginClickEvent();
 Handlers.addMovieToWatchList(dbInteraction.getSingleMovieFromTMDB);
 Handlers.searchTmdbOnKeyUp(dbInteraction.getMoviesFromTmdbOnSearch, template.buildMovieCard);
-});
 
 module.exports = Handlers;
