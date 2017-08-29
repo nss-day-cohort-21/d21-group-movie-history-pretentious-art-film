@@ -12,7 +12,9 @@ function loadUserMovies() {
 	FBInteraction.getMovies(currentUser)
 	.then((movieData)=>{
 		console.log("movie data", movieData);
+
 	});
+
 }
 
 // loadUserMovies();  //loading movies at page load for now

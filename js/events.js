@@ -116,7 +116,10 @@ $(document).on("click", "#btn-showWatched", ()=>{
         $('#user-input').hide();
         $('#user-unwatched').hide();
         $('#user-watched').css("display", "block");
+        if (User.currentUser == null) {
+        } else {
         $('#slidecontainer').css("display", "block");
+      }
  });
 $(document).on("click", "#btn-showUnWatched", ()=>{
         $('#user-watched').hide();
