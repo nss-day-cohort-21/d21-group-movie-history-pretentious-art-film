@@ -214,6 +214,19 @@ $('#btn-showUnWatched').on('click', ()=>{
           console.log('movieobj', movieObj);
 
 
+          // $(`.rateYo`).rateYo({
+          //     numStars: 10,
+          //     rating: realStars,
+          //     spacing: "5px"
+          // }).on("rateyo.set", function (e, data) {
+          //
+          //
+          //     console.log("The rating is set to " + data.rating *2 + "!");
+          // });
+
+
+
+
           dbInteraction
               .addMovieToFirebase(movieObj)
               .then(function(movie) {
