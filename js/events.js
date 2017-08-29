@@ -6,6 +6,10 @@ let User = require('./user');
 let template = require('./DOM_builder');
 let firebase = require('./firebase_interaction');
 
+$('#btn-login').click(event => {
+      logoutSearchBar();
+      User.logInLogOut();
+    });
 
 let Handlers = {
   loginClickEvent: function() {

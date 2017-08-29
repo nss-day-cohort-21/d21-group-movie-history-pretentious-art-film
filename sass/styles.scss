@@ -19,7 +19,7 @@
 /* Keep image card same size
 ================================*/
 //Profile Image
-#profile-image {
+#profile-image-anchor {
   width: 48px;
   height: 48px;
   border: none !important;
@@ -31,7 +31,7 @@
   z-index: 999;
 }
 
-#profile-image img {
+#profile-image-anchor img {
   border-radius: inherit;
   width: inherit;
   height: inherit;
