@@ -170,29 +170,19 @@ var realStars = 0;
 
 $(document).on("click",".rateYo",(e)=> {
     let startarget = e.currentTarget;
-    let movieId = $(startarget).data("movie");
-    console.log('movieId', movieId);
+    let uglyid = $(startarget).data("uglyid");
+    console.log('movieId', uglyid);
     let rating = $(startarget).rateYo("rating") * 2;
     realStars = rating;
     console.log(rating);
-    let moviesPromise = dbInteraction.getSingleMovieFromTMDB(movieId);
-    let actorsPromise = dbInteraction.getMovieActors(movieId);
-    return Promise.all([moviesPromise, actorsPromise]).then(data => {
-        let movie = data[0];
-        let actors = data[1];
-        let movieObj = Handlers.buildMovieObj(movie, actors);
-        movieObj.starRating = realStars;
-        dbInteraction
-            .addMovieToFirebase(movieObj)
-            .then(function (movie) {
-                // Populate the DOM
-                console.log('Added Movie: ', movie);
-            })
-            .catch(error => {
-                console.warn('ERROR: ', error.code, error.message);
-            });
+    let myquery = require('jquery');
+      myquery.ajax({
+        url: `https://movie-list-bb8f4.firebaseio.com/movies/${uglyid}.json`,
+        method: 'PATCH',
+        data: JSON.stringify({starRating:realStars})
+      }).done(function(movie) {
 
-    });
+      });
     // console.log(movieId);
     // console.log(startarget);
     // Handlers.addMovieToWatchList(rating);

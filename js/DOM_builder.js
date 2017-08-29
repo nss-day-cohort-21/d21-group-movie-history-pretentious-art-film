@@ -3,6 +3,8 @@
 let _ = require('lodash');
 let tmdbInteractions = require('./TMDB_interaction');
 
+// require('./jquery.rateyo.js');
+
 
 /*SLIDER*/
 var slider = document.getElementById("myRange");
@@ -21,6 +23,7 @@ let domBuilder = {
     $('#card-wrapper').html('');
     let card = '';
     console.log("movieData", movieData);
+
     // var uglyId = [];
 var starRating =[];
 
@@ -50,13 +53,15 @@ var starRating =[];
             <h2 class="card-text">${movie.original_title}</h2>
             <p class="card-text">${movie.overview}</p>
             ${currentMovie.stars}
-            <div class="rateYo ${movie.id}" ></div>
+            <div class="rateYo ${movie.id}" data-movie="${movie.id}" data-uglyid="${index}" ></div>
              </div>
             </div>
             </div>`;
 
+
         starRating.push(movieData[index].starRating);
         console.log('movieId', movie.id);
+
     });
 
     console.log('starRating', starRating);
@@ -72,6 +77,7 @@ starRating.forEach((item, index)=>{
 
   console.log('what were looking for', movieData[keys[index]].id);
     $('.' + movieData[keys[index]].id).rateYo({
+      maxValue:10,
     numStars: 10,
     rating: item,
     spacing: "5px"
@@ -85,9 +91,11 @@ starRating.forEach((item, index)=>{
 
     $('#' + keys[index]).on("click", (event)=>{
 // let key = event.target.
+let $ = require('jquery');
+      event.target.parentNode.parentNode.remove();
 
         $.ajax({
-            url: `https://movie-list-bb8f4.firebaseio.com/movies/${keys[index]}/.json`,
+            url: `https://movie-list-bb8f4.firebaseio.com/movies/${keys[index]}.json`,
             method: "DELETE"
         })
             .done(function(response) {
