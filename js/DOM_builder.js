@@ -36,7 +36,7 @@ var starRating =[];
 
 
       };
-      card += `<div class="col-3 each-card" data-list=".default_list_data">
+      card += `<div class="col-6 each-card" id="builderHelp">
             <div class="card">
             <div class="img-wrapper">
             <img class="card-img-top" src="${currentMovie.poster}" alt="Card image cap">
@@ -44,7 +44,7 @@ var starRating =[];
             <div class="card-body">
             <div class="d-flex w-100 justify-content-between">
 
-            <small class="text-muted">${movie.release_date}</small>
+            <small>${movie.release_date}</small>
             </div>
             <hr>
             <h2 class="card-text">${movie.original_title}</h2>
