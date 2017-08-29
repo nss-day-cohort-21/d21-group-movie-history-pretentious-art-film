@@ -18,12 +18,15 @@ function addPhotoAfterLogin (userObj) {
     `<img src="${userObj.user.photoURL}" id="profile-img" class="flex-sm-fill">`
   );
 }
-..
+function clearUserPhoto (){
+  $("#profile-image-anchor").empty();
+}
+
 let User = {
   logInLogOut: function() {
     if (currentUser) {
       firebase.auth().signOut().then(() => {
-        $("#profile-image-anchor")
+        clearUserPhoto();
           currentUser = null;
         })
         .catch(error => {
