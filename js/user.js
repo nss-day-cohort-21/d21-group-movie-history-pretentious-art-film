@@ -29,8 +29,6 @@ let User = {
     if (currentUser) {
       firebase.auth().signOut().then(() => {
         clearUserPhoto();
-        $('#slidecontainer').hide();
-  
           currentUser = null;
         })
         .catch(error => {
@@ -41,7 +39,6 @@ let User = {
           console.log("userObj", userObj);
           currentUser = userObj.user;
           addPhotoAfterLogin(userObj);
-          $('#slidecontainer').show();
         })
         .catch(error => {
         });
