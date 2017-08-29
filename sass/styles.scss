@@ -16,12 +16,24 @@
   border: none;
 }
 
-/* Keep image card same size
-================================*/
-//Profile Image
+body{
+  background-color: #67cfa5;
+}
+.card{
+  background-color: #e25364;
+}
+.btn{
+  background-color: #7b3129;
+}
+.navbar{
+  background-color: #27896d !important;
+}
+
+/*Profile Image
+===============*/
 #profile-image-anchor {
-  width: 48px;
-  height: 48px;
+  width: 65px;
+  height: 65px;
   border: none !important;
   border-radius: 50%;
   //box-shadow:
@@ -29,6 +41,7 @@
   //        0 1px 1px rgba(0,0,0,0.1);
   background-color: transparent !important;
   z-index: 999;
+  margin-right: 5px;
 }
 
 #profile-image-anchor img {
@@ -43,6 +56,10 @@
   margin-right: 3%;
 }
 
+
+
+/* Keep image card same size
+================================*/
 
 .img-wrapper {
   display: flex;

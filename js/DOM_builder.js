@@ -3,6 +3,7 @@
 let _ = require('lodash');
 let tmdbInteractions = require('./TMDB_interaction');
 
+
 let domBuilder = {
   buildMovieCard: function(movieData) {
     $('#card-wrapper').html('');
