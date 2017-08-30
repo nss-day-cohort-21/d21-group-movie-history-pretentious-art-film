@@ -68,6 +68,7 @@ let dbInteraction = {
    * @returns {promise} movie : success added movie
    */
   addMovieToFirebase: function(movieObj) {
+    let movieObjs = movieObj;
     return new Promise(function(resolve, reject) {
       $.ajax({
         url: `${User.getFirebaseConfi().databaseURL}/movies.json`,
@@ -75,7 +76,8 @@ let dbInteraction = {
         data: JSON.stringify(movieObj),
         dataType: 'json'
       }).done(function(movie) {
-        resolve(movie);
+        movieObjs.key = movie.name;
+        resolve(movieObjs);
       });
     });
   }

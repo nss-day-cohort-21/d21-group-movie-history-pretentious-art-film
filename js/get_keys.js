@@ -3,11 +3,12 @@
 let FirebaseKeys = {
   getKey: function() {
     return {
-      apiKey: 'AIzaSyCDbuxg0OfEiqFLQJv9Lw4Pd6LvEAFST8E',
-      authDomain: 'second-tester.firebaseapp.com',
-      databaseURL: 'https://second-tester.firebaseio.com'
+      apiKey: 'AIzaSyCdQwFnhT6W_VnKNdl5ESRwqXVXmHNjRQo',
+      authDomain: 'movie-list-bb8f4.firebaseapp.com',
+      databaseURL: 'https://movie-list-bb8f4.firebaseio.com'
     };
   }
 };
 
 module.exports = FirebaseKeys;
+
